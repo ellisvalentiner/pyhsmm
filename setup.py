@@ -1,4 +1,4 @@
-from __future__ import print_function
+
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext as _build_ext
 from setuptools.command.sdist import sdist as _sdist

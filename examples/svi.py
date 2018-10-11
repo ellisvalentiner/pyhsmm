@@ -1,4 +1,4 @@
-from __future__ import division
+
 import numpy as np
 from numpy import newaxis as na
 from matplotlib import pyplot as plt
@@ -25,8 +25,8 @@ datas, heldout = hold_out(allseqs,0.05)
 training_size = sum(data.shape[0] for data in datas)
 print('...done!')
 
-print('%d total frames' % sum(data.shape[0] for data in alldata))
-print('split into %d training and %d test sequences' % (len(datas),len(heldout)))
+print(('%d total frames' % sum(data.shape[0] for data in alldata)))
+print(('split into %d training and %d test sequences' % (len(datas),len(heldout))))
 
 ### inference!
 

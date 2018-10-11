@@ -1,4 +1,4 @@
-from __future__ import division
+
 from builtins import range, zip, filter
 
 import numpy as np
@@ -22,7 +22,7 @@ def solve_psd(A,b,chol=None,overwrite_b=False,overwrite_A=False):
                 lower=False,overwrite_b=True)
 
 def interleave(*iterables):
-    return list(chain.from_iterable(zip(*iterables)))
+    return list(chain.from_iterable(list(zip(*iterables))))
 
 def joindicts(dicts):
     # stuff on right clobbers stuff on left
@@ -148,7 +148,7 @@ def _sieve(stream):
     # just for fun; doesn't work over a few hundred
     val = next(stream)
     yield val
-    for x in filter(lambda x: x%val != 0, _sieve(stream)):
+    for x in [x for x in _sieve(stream) if x%val != 0]:
         yield x
 
 def primes():
@@ -278,7 +278,7 @@ def indicators_to_changepoints(indseq,which='ends'):
     if changes[-1] != len(indseq):
         changes.append(len(indseq))
 
-    return zip(changes[:-1],changes[1:])
+    return list(zip(changes[:-1],changes[1:]))
 
 def indices_to_changepoints(T,changes):
     changes = list(changes)
@@ -288,12 +288,12 @@ def indices_to_changepoints(T,changes):
     if changes[-1] != T:
         changes.append(T)
 
-    return zip(changes[:-1],changes[1:])
+    return list(zip(changes[:-1],changes[1:]))
 
 def labels_to_changepoints(labels):
     _, durs = rle(labels)
     cdurs = np.concatenate(((0,),durs.cumsum()))
-    return zip(cdurs[:-1],cdurs[1:])
+    return list(zip(cdurs[:-1],cdurs[1:]))
 
 def ndarrayhash(v):
     assert isinstance(v,np.ndarray)

@@ -1,4 +1,4 @@
-from __future__ import division
+
 import numpy as np
 from scipy.misc import logsumexp
 
@@ -14,7 +14,7 @@ def _get_stats(idx):
     if len(grp) == 0:
         return []
 
-    datas, kwargss = zip(*grp)
+    datas, kwargss = list(zip(*grp))
 
     states_list = []
     for data, kwargs in zip(datas,kwargss):
@@ -32,7 +32,7 @@ def _get_sampled_stateseq(idx):
     if len(grp) == 0:
         return []
 
-    datas, kwargss = zip(*grp)
+    datas, kwargss = list(zip(*grp))
 
     states_list = []
     for data, kwargs in zip(datas,kwargss):
@@ -46,7 +46,7 @@ def _get_sampled_stateseq_and_labels(idx):
     if len(grp) == 0:
         return []
 
-    data, kwargss = zip(*grp)
+    data, kwargss = list(zip(*grp))
 
     states_list = []
     for data, kwargs in zip(datas,kwargss):

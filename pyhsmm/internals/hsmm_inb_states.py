@@ -1,4 +1,4 @@
-from __future__ import division
+
 from builtins import zip, range
 from future.utils import with_metaclass
 import numpy as np
@@ -290,7 +290,7 @@ class HSMMStatesIntegerNegativeBinomial(_HSMMStatesIntegerNegativeBinomialBase):
         starts, ends = cumsum(rs,strict=True), cumsum(rs,strict=False)
         trans_matrix = np.zeros((ends[-1],ends[-1]))
 
-        Elnps, Eln1mps = zip(*[d._fixedr_distns[d.ridx]._mf_expected_statistics() for d in self.dur_distns])
+        Elnps, Eln1mps = list(zip(*[d._fixedr_distns[d.ridx]._mf_expected_statistics() for d in self.dur_distns]))
         Eps, E1mps = np.exp(Elnps), np.exp(Eln1mps) # NOTE: actually exp(E[ln(p)]) etc
 
         enters = self.mf_bwd_enter_rows(rs,Eps,E1mps)

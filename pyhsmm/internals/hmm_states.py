@@ -1,4 +1,4 @@
-from __future__ import division
+
 from builtins import range
 from future.utils import with_metaclass
 import numpy as np
@@ -493,7 +493,7 @@ class HMMStatesPython(_StatesBase):
 
             linear_term = \
                 sum(np.dot(np.ravel(a-b), np.ravel(c))
-                    for a, b, c in zip(new_params, old_params, E_stats))
+                    for a, b, c in list(zip(new_params, old_params, E_stats)))
 
             return linear_term - (new_normalizer - old_normalizer)
 

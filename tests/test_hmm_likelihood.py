@@ -1,4 +1,4 @@
-from __future__ import division
+
 from builtins import range
 import numpy as np
 from numpy import newaxis as na
@@ -53,7 +53,7 @@ def compute_likelihood_enumeration(obs_distns,trans_matrix,init_distn,data):
     aBl = np.hstack([o.log_likelihood(data)[:,na] for o in obs_distns])
 
     tot = -np.inf
-    for stateseq in itertools.product(range(N),repeat=T):
+    for stateseq in itertools.product(list(range(N)),repeat=T):
         loglike = 0.
         loglike += np.log(init_distn[stateseq[0]])
         for a,b in zip(stateseq[:-1],stateseq[1:]):

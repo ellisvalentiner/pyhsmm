@@ -1,4 +1,4 @@
-from __future__ import division
+
 from builtins import range, map
 import numpy as np
 from numpy import newaxis as na
@@ -627,7 +627,7 @@ class DelayedGeoHSMMStates(HSMMStatesPython):
         # NOTE: more general version, allows different delays, o/w we could
         # construct with np.kron
         if self._hmm_trans_matrix is None:
-            ps, delays = map(np.array,zip(*[(d.p,d.delay) for d in self.dur_distns]))
+            ps, delays = list(map(np.array,list(zip(*[(d.p,d.delay) for d in self.dur_distns]))))
             starts, ends = cumsum(delays,strict=True), cumsum(delays,strict=False)
             trans_matrix = self._hmm_trans_matrix = np.zeros((ends[-1],ends[-1]))
 

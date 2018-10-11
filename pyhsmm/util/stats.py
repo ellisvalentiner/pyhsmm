@@ -1,4 +1,4 @@
-from __future__ import division
+
 from builtins import zip, range
 import numpy as np
 from numpy.random import random

@@ -1,4 +1,4 @@
-from __future__ import division
+
 from future.utils import iteritems, itervalues
 from builtins import map, zip
 
@@ -193,7 +193,7 @@ class _HMMBase(Model):
             for state in s.stateseq:
                 canonical_ids[state]
         return list(map(operator.itemgetter(0),
-                sorted(canonical_ids.items(),key=operator.itemgetter(1))))
+                sorted(list(canonical_ids.items()),key=operator.itemgetter(1))))
 
     @property
     def state_usages(self):
@@ -362,7 +362,7 @@ class _HMMBase(Model):
             unused_states = [idx for idx in range(self.num_states) if idx not in used_states]
 
             colorseq = np.random.RandomState(0).permutation(np.linspace(0,1,self.num_states))
-            colors = dict((idx, v if scalars else cmap(v)) for idx, v in zip(used_states,colorseq))
+            colors = dict((idx, v if scalars else cmap(v)) for idx, v in list(zip(used_states,colorseq)))
 
             for state in unused_states:
                 colors[state] = cmap(1.)
@@ -371,7 +371,7 @@ class _HMMBase(Model):
         elif isinstance(color,dict):
             return color
         else:
-            return dict((idx,color) for idx in range(self.num_states))
+            return dict((idx,color) for idx in list(range(self.num_states)))
 
     def plot_stateseq(self,s,ax=None,plot_slice=slice(None),update=False,draw=True):
         s = self.states_list[s] if isinstance(s,int) else s
@@ -494,7 +494,7 @@ class _HMMGibbsSampling(_HMMBase,ModelGibbsSampling):
 
             raw_stateseqs = Parallel(n_jobs=num_procs,backend='multiprocessing')\
                     (delayed(parallel._get_sampled_stateseq)(idx)
-                            for idx in range(len(joblib_args)))
+                            for idx in list(range(len(joblib_args))))
 
             for s, (stateseq, log_likelihood) in zip(
                     [s for grp in list_split(states_list,num_procs) for s in grp],
@@ -575,7 +575,7 @@ class _HMMMeanField(_HMMBase,ModelMeanField):
             parallel.args = joblib_args
 
             allstats = Parallel(n_jobs=num_procs,backend='multiprocessing')\
-                    (delayed(parallel._get_stats)(idx) for idx in range(len(joblib_args)))
+                    (delayed(parallel._get_stats)(idx) for idx in list(range(len(joblib_args))))
 
             for s, stats in zip(
                     [s for grp in list_split(states_list) for s in grp],
@@ -1243,8 +1243,8 @@ class _SeparateTransMixin(object):
 
     def __getstate__(self):
         dct = self.__dict__.copy()
-        dct['trans_distns'] = dict(self.trans_distns.items())
-        dct['init_state_distns'] = dict(self.init_state_distns.items())
+        dct['trans_distns'] = dict(list(self.trans_distns.items()))
+        dct['init_state_distns'] = dict(list(self.init_state_distns.items()))
         return dct
 
     def __setstate__(self,dct):
@@ -1262,7 +1262,7 @@ class _SeparateTransMixin(object):
         self.trans_distns, other.trans_distns = self.trans_distns, other.trans_distns
         self.init_state_distns, other.init_state_distns = \
                 other.init_state_distns, self.init_state_distns
-        for d1, d2 in zip(self.init_state_distns.values(),other.init_state_distns.values()):
+        for d1, d2 in zip(list(self.init_state_distns.values()),list(other.init_state_distns.values())):
             d1.model = self
             d2.model = other
         super(_SeparateTransMixin,self).swap_sample_with(other)
