@@ -1,6 +1,6 @@
 
 from builtins import zip, range
-from future.utils import with_metaclass
+from six import with_metaclass
 import numpy as np
 import abc
 import scipy.stats as stats
@@ -462,4 +462,3 @@ class HSMMStatesTruncatedIntegerNegativeBinomialSeparateTrans(
         _SeparateTransMixin,
         HSMMStatesTruncatedIntegerNegativeBinomial):
     pass
-

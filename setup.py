@@ -11,8 +11,6 @@ from glob import glob
 import tarfile
 import shutil
 
-from future.standard_library import install_aliases
-install_aliases()
 from urllib.request import urlretrieve
 
 # use cython if we can import it successfully
@@ -112,8 +110,8 @@ setup(name='pyhsmm',
       keywords=['bayesian', 'inference', 'mcmc', 'time-series', 'monte-carlo',
                 'variational inference', 'mean field', 'vb'],
       install_requires=[
-          "numpy", "scipy", "matplotlib", "nose", "pybasicbayes >= 0.1.3", "future", "six"],
-      setup_requires=['numpy', "future", "six"],
+          "numpy", "scipy", "matplotlib", "nose", "pybasicbayes >= 0.1.3", "six"],
+      setup_requires=['numpy', "six"],
       ext_modules=ext_modules,
       classifiers=[
           'Development Status :: 4 - Beta',

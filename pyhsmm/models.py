@@ -1,5 +1,5 @@
 
-from future.utils import iteritems, itervalues
+from six import iteritems, itervalues
 from builtins import map, zip
 
 import numpy as np
@@ -1393,4 +1393,3 @@ class WeakLimitHDPHSMMTruncatedIntNegBinSeparateTrans(
         _SeparateTransMixin,
         WeakLimitHDPHSMMTruncatedIntNegBin):
     _states_class = hsmm_inb_states.HSMMStatesTruncatedIntegerNegativeBinomialSeparateTrans
-

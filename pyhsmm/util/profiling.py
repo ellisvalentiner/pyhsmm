@@ -1,7 +1,7 @@
 
 import numpy as np
 import sys, inspect, os, functools, time, collections
-from future.utils import iteritems
+from six import iteritems
 
 ### use @timed for really basic timing
 
@@ -52,4 +52,3 @@ try:
             _prof.print_stats(stream=stream)
 except ImportError:
     line_profiled = lambda x: x
-

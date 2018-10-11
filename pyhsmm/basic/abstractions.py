@@ -1,5 +1,5 @@
 
-from future.utils import with_metaclass
+from six import with_metaclass
 
 import abc
 import numpy as np
@@ -127,4 +127,3 @@ class DurationDistribution(with_metaclass(abc.ABCMeta, Distribution)):
                 plt.hist(data,bins=t-0.5,color=color,normed=len(set(data)) > 1)
             else:
                 plt.hist(data,bins=t-0.5,color=color)
-

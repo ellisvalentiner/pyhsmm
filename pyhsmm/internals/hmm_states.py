@@ -1,6 +1,6 @@
 
 from builtins import range
-from future.utils import with_metaclass
+from six import with_metaclass
 import numpy as np
 from numpy import newaxis as na
 import abc
